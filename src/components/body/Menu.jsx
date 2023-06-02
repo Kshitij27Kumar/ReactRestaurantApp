@@ -37,6 +37,7 @@ export class Menu extends Component {
       console.log('hey')
       dishDetails = <DishDetail dish={this.state.selectedDish} />
     }
+    document.title = 'Menu Page'
     return (
       <Container>
         <Row lg={3} md={3} sm={6} xs={6}>
