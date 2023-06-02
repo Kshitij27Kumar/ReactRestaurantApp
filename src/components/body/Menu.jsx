@@ -5,7 +5,7 @@ import DishDetail from './DishDetail.jsx'
 export class Menu extends Component {
   state = {
     dishes: DISHES,
-    selectedDish: false,
+    selectedDish: null,
   }
 
   onDishSelect = (dish) => {
@@ -16,12 +16,17 @@ export class Menu extends Component {
   render() {
     const menu = this.state.dishes.map((item) => {
       return (
-        <MenuItem dish={item} key={item.id} DishSelect={this.onDishSelect} />
+        <MenuItem
+          dish={item}
+          key={item.id}
+          DishSelect={() => this.onDishSelect(item)}
+        />
       )
     })
 
     let dishDetails = null
     if (this.state.selectedDish != null) {
+      console.log('hey')
       dishDetails = <DishDetail dish={this.state.selectedDish} />
     }
     return (
