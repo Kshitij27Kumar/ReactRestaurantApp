@@ -5,7 +5,7 @@ const DishDetail = (props) => {
   //   console.log(props.dish.comments)
   return (
     <div>
-      <Card style={{ width: '35rem' }}>
+      <Card style={{ width: '48rem' }}>
         <Card.Img variant='top' src={props.dish.image} />
         <Card.Body>
           <Card.Title>{props.dish.name}</Card.Title>
