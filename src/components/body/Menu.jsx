@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import DISHES from '../../data/dishes.js'
 import { Container, Row, Modal, Button } from 'react-bootstrap'
+import DISHES from '../../data/dishes.js'
+import COMMENTS from '../../data/comments.js'
 import MenuItem from './MenuItem.jsx'
 import DishDetail from './DishDetail.jsx'
 export class Menu extends Component {
   state = {
     dishes: DISHES,
+    comments: COMMENTS,
     selectedDish: null,
     show: false,
   }
@@ -34,8 +36,12 @@ export class Menu extends Component {
 
     let dishDetails = null
     if (this.state.selectedDish != null) {
-      console.log('hey')
-      dishDetails = <DishDetail dish={this.state.selectedDish} />
+      const comments = this.state.comments.filter((comment) => {
+        return comment.dishId === this.state.selectedDish.id
+      })
+      dishDetails = (
+        <DishDetail dish={this.state.selectedDish} comments={comments} />
+      )
     }
     document.title = 'Menu Page'
     return (
