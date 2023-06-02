@@ -7,20 +7,54 @@ import {
   Col,
   FloatingLabel,
 } from 'react-bootstrap'
+
 export class Contact extends Component {
+  constructor() {
+    super()
+    this.state = {
+      firstname: '',
+      lastname: '',
+      mobile: '',
+      email: '',
+      agree: false,
+      message: '',
+    }
+  }
+
+  handleInputChange = (event) => {
+    const value =
+      event.target.type === 'checkbox'
+        ? event.target.checked
+        : event.target.value
+    const name = event.target.name
+    this.setState({
+      [name]: value,
+    })
+  }
+
+  handleSubmit = (event) => {
+    console.log(this.state)
+    event.preventDefault()
+  }
+
   render() {
+    document.title = 'Contact Page'
     return (
       <div>
         <Fragment>
           <Container>
-            <h1>Send us your Feedback!</h1>
-            <Form>
+            <h1>Send us your FeedBack</h1>
+
+            <Form onSubmit={this.handleSubmit}>
               <Row className='mb-3'>
                 <Form.Group as={Col}>
                   <Form.Label>First Name</Form.Label>
                   <Form.Control
                     type='text'
-                    placeholder='Enter your first name'
+                    name='firstname'
+                    placeholder='First Name'
+                    value={this.state.firstname}
+                    onChange={this.handleInputChange}
                   />
                 </Form.Group>
 
@@ -28,25 +62,34 @@ export class Contact extends Component {
                   <Form.Label>Last Name</Form.Label>
                   <Form.Control
                     type='text'
-                    placeholder='Enter your last name'
+                    name='lastname'
+                    placeholder='Last Name'
+                    value={this.state.lastname}
+                    onChange={this.handleInputChange}
                   />
                 </Form.Group>
               </Row>
 
               <Row className='mb-3'>
                 <Form.Group as={Col}>
-                  <Form.Label>Email</Form.Label>
+                  <Form.Label>Mobile</Form.Label>
                   <Form.Control
-                    type='email'
-                    placeholder='Enter your email address'
+                    type='number'
+                    name='mobile'
+                    placeholder='Mobile'
+                    value={this.state.mobile}
+                    onChange={this.handleInputChange}
                   />
                 </Form.Group>
 
                 <Form.Group as={Col}>
-                  <Form.Label>Contact Number</Form.Label>
+                  <Form.Label>Email</Form.Label>
                   <Form.Control
-                    type='number'
-                    placeholder='Enter your contact number'
+                    type='email'
+                    name='email'
+                    placeholder='Enter Your Email'
+                    value={this.state.email}
+                    onChange={this.handleInputChange}
                   />
                 </Form.Group>
               </Row>
@@ -59,12 +102,21 @@ export class Contact extends Component {
               >
                 <Form.Control
                   as='textarea'
+                  name='message'
                   placeholder='Leave your feedback here'
+                  value={this.state.message}
+                  onChange={this.handleInputChange}
                 />
               </FloatingLabel>
 
               <Form.Group className='mb-3' id='formGridCheckbox'>
-                <Form.Check type='checkbox' label='Can we contact you?' />
+                <Form.Check
+                  type='checkbox'
+                  name='agree'
+                  label='Can we contact you?'
+                  checked={this.state.agree}
+                  onChange={this.handleInputChange}
+                />
               </Form.Group>
 
               <Button variant='primary' type='submit'>
